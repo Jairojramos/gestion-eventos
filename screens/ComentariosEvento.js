@@ -1,4 +1,3 @@
-import { useSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Button, FlatList, Text, TextInput, View } from 'react-native';
 
@@ -7,8 +6,8 @@ const comentariosMock = [
   { id: '2', usuario: 'Luis', texto: 'Me encantó' },
 ];
 
-export default function Comentarios() {
-  const { eventId } = useSearchParams();
+export default function ComentariosEventoScreen({ route }) {
+  const { eventId } = route.params;
   const [comentarios, setComentarios] = useState(comentariosMock);
   const [nuevoComentario, setNuevoComentario] = useState('');
 
@@ -31,7 +30,6 @@ export default function Comentarios() {
           <Text>{item.usuario}: {item.texto}</Text>
         )}
       />
-
       <TextInput
         placeholder="Escribe un comentario"
         value={nuevoComentario}

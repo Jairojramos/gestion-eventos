@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text, Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from 'react';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { auth } from '../firebaseConfig';
 
 export default function RegisterScreen({ navigation }) {

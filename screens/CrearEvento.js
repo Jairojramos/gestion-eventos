@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const CrearEvento = () => {
+export default function CrearEvento({ navigation }) {
   const [descripcion, setDescripcion] = useState('');
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
   const [ubicacion, setUbicacion] = useState('');
 
   const handleCrear = () => {
+    if (!descripcion || !fecha || !hora || !ubicacion) {
+      Alert.alert('Error', 'Por favor completa todos los campos.');
+      return;
+    }
+    // Aquí deberías hacer la petición a la API para crear el evento.
     Alert.alert(
-      'Evento creado (simulado)',
-      `Descripción: ${descripcion}\nFecha: ${fecha}\nHora: ${hora}\nUbicación: ${ubicacion}`
+      'Evento creado',
+      `Descripción: ${descripcion}\nFecha: ${fecha}\nHora: ${hora}\nUbicación: ${ubicacion}`,
+      [
+        {
+          text: "OK",
+          onPress: () => navigation.goBack()
+        }
+      ]
     );
     setDescripcion('');
     setFecha('');
@@ -48,9 +59,7 @@ const CrearEvento = () => {
       <Button title="Crear Evento" onPress={handleCrear} />
     </View>
   );
-};
-
-export default CrearEvento;
+}
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24, backgroundColor: '#fff' },

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from 'react';
 import {
-  View,
-  TextInput,
+  Alert,
   Button,
   StyleSheet,
   Text,
-  Alert,
-  TouchableOpacity
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 
 export default function LoginScreen({ navigation }) {
@@ -24,13 +24,8 @@ export default function LoginScreen({ navigation }) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // Mostrar alerta de inicio de sesión exitoso
       Alert.alert("Éxito", `Bienvenido ${user.email}`);
-
-      // Aquí podrías navegar a una pantalla principal:
-      // navigation.replace("Home");
-
+      navigation.replace("ListaEventos");
     } catch (error) {
       switch (error.code) {
         case 'auth/user-not-found':
@@ -51,7 +46,6 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Iniciar Sesión</Text>
-
       <TextInput
         style={styles.input}
         placeholder="Correo electrónico"
@@ -60,7 +54,6 @@ export default function LoginScreen({ navigation }) {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
@@ -68,9 +61,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setPassword}
         secureTextEntry
       />
-
       <Button title="Ingresar" onPress={handleLogin} />
-
       <TouchableOpacity
         onPress={() => navigation.navigate('Register')}
         style={{ marginTop: 20 }}
