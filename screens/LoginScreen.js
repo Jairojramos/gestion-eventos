@@ -1,45 +1,34 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from 'react';
-import {
-  Alert,
-  Button,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
-import { auth } from '../firebaseConfig';
+import { useState } from "react";
+import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useAuth } from "../utils/authContext";
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [usuario, setUsuario] = useState("");
+  const [contra, setContra] = useState("");
+  const { login, loginWithGoogle } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert("Error", "Por favor completa todos los campos.");
-      return;
-    }
-
+    setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      Alert.alert("Éxito", `Bienvenido ${user.email}`);
+      await login(usuario, contra);
       navigation.replace("ListaEventos");
     } catch (error) {
-      switch (error.code) {
-        case 'auth/user-not-found':
-          Alert.alert("Error", "El usuario no existe.");
-          break;
-        case 'auth/wrong-password':
-          Alert.alert("Error", "Contraseña incorrecta.");
-          break;
-        case 'auth/invalid-email':
-          Alert.alert("Error", "El correo no es válido.");
-          break;
-        default:
-          Alert.alert("Error al iniciar sesión", error.message);
-      }
+      Alert.alert("Error", error.message || "No se pudo iniciar sesión");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    try {
+      await loginWithGoogle();
+      navigation.replace("ListaEventos");
+    } catch (error) {
+      Alert.alert("Error", error.message || "No se pudo iniciar sesión con Google");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,50 +36,32 @@ export default function LoginScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Iniciar Sesión</Text>
       <TextInput
+        placeholder="Usuario"
+        value={usuario}
+        onChangeText={setUsuario}
         style={styles.input}
-        placeholder="Correo electrónico"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
         placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
+        value={contra}
+        onChangeText={setContra}
+        style={styles.input}
         secureTextEntry
       />
-      <Button title="Ingresar" onPress={handleLogin} />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Register')}
-        style={{ marginTop: 20 }}
-      >
-        <Text style={{ color: 'blue', textAlign: 'center' }}>
-          ¿No tienes cuenta? Regístrate aquí
-        </Text>
+      <Button title={loading ? "Cargando..." : "Ingresar"} onPress={handleLogin} disabled={loading} />
+      <View style={{ height: 10 }} />
+      <Button title="Ingresar con Google" color="#DB4437" onPress={handleGoogleLogin} disabled={loading} />
+      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        <Text style={styles.link}>¿No tienes cuenta? Regístrate aquí</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 24,
-    backgroundColor: '#fff'
-  },
-  input: {
-    borderBottomWidth: 1,
-    marginBottom: 16,
-    padding: 8,
-    fontSize: 16
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 24,
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
+  container: { flex: 1, justifyContent: "center", padding: 20 },
+  title: { fontSize: 24, marginBottom: 20, fontWeight: "bold", textAlign: "center" },
+  input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 5 },
+  link: { color: "blue", marginTop: 15, textAlign: "center" },
 });

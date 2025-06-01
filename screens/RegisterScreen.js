@@ -1,45 +1,24 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { auth } from '../firebaseConfig';
+import { useState } from "react";
+import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useAuth } from "../utils/authContext";
 
 export default function RegisterScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [nombres, setNombres] = useState("");
+  const [apellidos, setApellidos] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [contra, setContra] = useState("");
+  const { register } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!email || !password || !passwordConfirm) {
-      Alert.alert("Error", "Completa todos los campos.");
-      return;
-    }
-    if (password !== passwordConfirm) {
-      Alert.alert("Error", "Las contraseñas no coinciden.");
-      return;
-    }
-    if (password.length < 6) {
-      Alert.alert("Error", "La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
-
+    setLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      Alert.alert("Éxito", "Usuario registrado correctamente.");
-      navigation.navigate('Login');
+      await register(nombres, apellidos, usuario, contra);
+      navigation.replace("ListaEventos");
     } catch (error) {
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          Alert.alert("Error", "Este correo ya está registrado.");
-          break;
-        case 'auth/invalid-email':
-          Alert.alert("Error", "Correo electrónico no válido.");
-          break;
-        case 'auth/weak-password':
-          Alert.alert("Error", "La contraseña es demasiado débil.");
-          break;
-        default:
-          Alert.alert("Error al registrar", error.message);
-      }
+      Alert.alert("Error", error.message || "No se pudo registrar");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,34 +26,44 @@ export default function RegisterScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
       <TextInput
+        placeholder="Nombres"
+        value={nombres}
+        onChangeText={setNombres}
         style={styles.input}
-        placeholder="Correo electrónico"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
+        autoCapitalize="words"
+      />
+      <TextInput
+        placeholder="Apellidos"
+        value={apellidos}
+        onChangeText={setApellidos}
+        style={styles.input}
+        autoCapitalize="words"
+      />
+      <TextInput
+        placeholder="Usuario"
+        value={usuario}
+        onChangeText={setUsuario}
+        style={styles.input}
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
         placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
+        value={contra}
+        onChangeText={setContra}
         style={styles.input}
-        placeholder="Confirmar contraseña"
-        value={passwordConfirm}
-        onChangeText={setPasswordConfirm}
         secureTextEntry
       />
-      <Button title="Registrar" onPress={handleRegister} />
+      <Button title={loading ? "Registrando..." : "Registrarse"} onPress={handleRegister} disabled={loading} />
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.link}>¿Ya tienes cuenta? Inicia sesión aquí</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex:1, justifyContent:'center', padding: 24, backgroundColor:'#fff' },
-  input: { borderBottomWidth: 1, marginBottom:16, padding:8, fontSize:16 },
-  title: { fontSize:24, marginBottom:24, textAlign:'center', fontWeight:'bold' },
+  container: { flex: 1, justifyContent: "center", padding: 20 },
+  title: { fontSize: 24, marginBottom: 20, fontWeight: "bold", textAlign: "center" },
+  input: { borderWidth: 1, padding: 10, marginBottom: 10, borderRadius: 5 },
+  link: { color: "blue", marginTop: 15, textAlign: "center" },
 });

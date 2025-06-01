@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, FlatList, Text, TextInput, View } from 'react-native';
 
+// Mock, se puede adaptar a la API real si está disponible
 const comentariosMock = [
   { id: '1', usuario: 'Ana', texto: 'Muy buen evento' },
   { id: '2', usuario: 'Luis', texto: 'Me encantó' },

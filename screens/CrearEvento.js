@@ -1,32 +1,52 @@
 import { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function CrearEvento({ navigation }) {
   const [descripcion, setDescripcion] = useState('');
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
   const [ubicacion, setUbicacion] = useState('');
+  const [cargando, setCargando] = useState(false);
 
-  const handleCrear = () => {
+  const handleCrear = async () => {
     if (!descripcion || !fecha || !hora || !ubicacion) {
       Alert.alert('Error', 'Por favor completa todos los campos.');
       return;
     }
-    // Aquí deberías hacer la petición a la API para crear el evento.
-    Alert.alert(
-      'Evento creado',
-      `Descripción: ${descripcion}\nFecha: ${fecha}\nHora: ${hora}\nUbicación: ${ubicacion}`,
-      [
-        {
-          text: "OK",
-          onPress: () => navigation.goBack()
-        }
-      ]
-    );
-    setDescripcion('');
-    setFecha('');
-    setHora('');
-    setUbicacion('');
+    setCargando(true);
+    try {
+      // Petición real a la API
+      const res = await fetch('https://tarea.transforma.edu.sv/Eventos/eventos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          descripcion,
+          fecha,
+          hora,
+          ubicacion,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Error al crear evento');
+      Alert.alert(
+        'Evento creado',
+        `Descripción: ${descripcion}\nFecha: ${fecha}\nHora: ${hora}\nUbicación: ${ubicacion}`,
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.goBack()
+          }
+        ]
+      );
+      setDescripcion('');
+      setFecha('');
+      setHora('');
+      setUbicacion('');
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    } finally {
+      setCargando(false);
+    }
   };
 
   return (
@@ -43,12 +63,14 @@ export default function CrearEvento({ navigation }) {
         placeholder="Fecha (YYYY-MM-DD)"
         value={fecha}
         onChangeText={setFecha}
+        keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'default'}
       />
       <TextInput
         style={styles.input}
         placeholder="Hora (HH:MM)"
         value={hora}
         onChangeText={setHora}
+        keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'default'}
       />
       <TextInput
         style={styles.input}
@@ -56,7 +78,7 @@ export default function CrearEvento({ navigation }) {
         value={ubicacion}
         onChangeText={setUbicacion}
       />
-      <Button title="Crear Evento" onPress={handleCrear} />
+      <Button title={cargando ? "Creando..." : "Crear Evento"} onPress={handleCrear} disabled={cargando} />
     </View>
   );
 }
