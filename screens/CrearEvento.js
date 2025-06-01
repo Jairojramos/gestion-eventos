@@ -84,7 +84,7 @@ export default function CrearEvento({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 23, backgroundColor: '#fff' },
   titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
   input: {
     borderWidth: 1,
