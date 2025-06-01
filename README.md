@@ -1,50 +1,93 @@
-# Welcome to your Expo app 👋
+# Universidad Don Bosco
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+## Proyecto de cátedra 2 – Ciclo I  
+**Asignatura:** Diseño y Programación de Software Multiplataforma DSP941 G02T
 
-1. Install dependencies
+---
 
+## Integrantes del grupo
+
+- Ramos Jiménez, Jairo Dennis — RJ172021  
+- Villegas Hernández, José Manuel — VH201183  
+- Vásquez Rodríguez, Denis Josué — VR222731  
+- Velázquez Rodríguez, Jorge Alberto — VR210280  
+
+---
+
+## Descripción del proyecto
+
+Esta aplicación móvil está desarrollada en React Native para la gestión de eventos comunitarios. Permite la autenticación de usuarios, creación y visualización de eventos, confirmación de asistencia, interacción social mediante comentarios y calificaciones, así como el seguimiento de historial y estadísticas de participación.
+
+---
+
+## Herramientas de gestión
+
+- [Tablero Trello del proyecto](https://trello.com/b/tu-link-trello)  
+
+---
+
+## Mockups de Diseño UX/UI
+
+Puedes ver y descargar los mockups en el siguiente enlace de Figma:  
+[https://www.figma.com/file/tu-link-a-mockups](https://www.figma.com/file/tu-link-a-mockups)  
+
+O descarga el PDF con todos los diseños aquí:  
+[Link PDF Mockups](https://github.com/Jairojramos/gestion-eventos/blob/main/mockups/Proyecto_Gestion_Eventos_Mockups.pdf)  
+
+---
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia **Creative Commons BY-NC-SA 4.0 International**.  
+Puedes consultarla aquí: [https://creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+---
+
+## Guía de usuario
+
+1. **Registro e inicio de sesión:**  
+   - Crea una cuenta o inicia sesión con usuario y contraseña.  
+   - También puedes usar Google para iniciar sesión.
+
+2. **Gestión de eventos:**  
+   - Crear nuevos eventos con fecha, hora, ubicación y descripción (solo organizadores).  
+   - Explorar eventos próximos y detalles de eventos pasados.  
+   - Confirmar asistencia (RSVP) y recibir notificaciones.
+
+3. **Interacción social:**  
+   - Deja comentarios y califica los eventos a los que has asistido.  
+   - Comparte eventos en redes sociales y correo electrónico.
+
+4. **Historial y estadísticas:**  
+   - Consulta el historial de eventos a los que has asistido.  
+   - Visualiza estadísticas sobre tu participación y comentarios.
+
+---
+
+## Instalación y configuración
+
+Sigue estos pasos para ejecutar la aplicación en tu entorno local:
+
+1. Clona este repositorio:  
    ```bash
-   npm install
-   ```
+   git clone https://github.com/Jairojramos/gestion-eventos.git
+---
 
-2. Start the app
+## Instalación y configuración
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Sigue estos pasos para ejecutar la aplicación en tu entorno local:
 
 ```bash
-npm run reset-project
-```
+# Clona este repositorio
+git clone https://github.com/Jairojramos/gestion-eventos.git
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# Entra en la carpeta del proyecto
+cd gestion-eventos
 
-## Learn more
+# Instala las dependencias
+npm install
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Ejecuta la aplicación (usando Expo)
+npx expo start
