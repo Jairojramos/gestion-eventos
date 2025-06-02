@@ -32,7 +32,7 @@ Esta aplicación móvil está desarrollada en React Native para la gestión de e
 ## Mockups de Diseño UX/UI
 
 Puedes ver y descargar los mockups en el siguiente enlace de Figma:  
-[https://www.figma.com/file/tu-link-a-mockups](https://www.figma.com/file/tu-link-a-mockups)  
+[https://www.figma.com/file/tu-link-a-mockups]([https://www.figma.com/file/tu-link-a-mockups](https://www.figma.com/design/07kRNkEUurT2wh6rFY0qIJ/Sin-t%C3%ADtulo?node-id=0-1&p=f))  
 
 O descarga el PDF con todos los diseños aquí:  
 [Link PDF Mockups](https://github.com/Jairojramos/gestion-eventos/blob/main/mockups/Proyecto_Gestion_Eventos_Mockups.pdf)  
