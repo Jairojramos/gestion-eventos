@@ -40,8 +40,15 @@ O descarga el PDF con todos los diseños aquí:
 
 ## Licencia
 
-Este proyecto está licenciado bajo la licencia **Creative Commons BY-NC-SA 4.0 International**.  
-Puedes consultarla aquí: [https://creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+Este proyecto está bajo la Licencia [Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es).
+
+Puedes consultar los términos de la licencia aquí:  
+- [Texto completo en español](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)
+- [Full legal text (English)](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+
+**Resumen:**  
+- Puedes compartir y adaptar el material, siempre que des crédito y no hagas uso comercial.
+- Las adaptaciones deben distribuirse bajo la misma licencia.
 
 ---
 
@@ -70,15 +77,6 @@ Puedes consultarla aquí: [https://creativecommons.org/licenses/by-nc-sa/4.0/](h
 
 Sigue estos pasos para ejecutar la aplicación en tu entorno local:
 
-1. Clona este repositorio:  
-   ```bash
-   git clone https://github.com/Jairojramos/gestion-eventos.git
----
-
-## Instalación y configuración
-
-Sigue estos pasos para ejecutar la aplicación en tu entorno local:
-
 ```bash
 # Clona este repositorio
 git clone https://github.com/Jairojramos/gestion-eventos.git
@@ -91,3 +89,4 @@ npm install
 
 # Ejecuta la aplicación (usando Expo)
 npx expo start
+```
