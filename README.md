@@ -24,7 +24,8 @@ Esta aplicación móvil está desarrollada en React Native para la gestión de e
 
 ## Herramientas de gestión
 
-- [Tablero Trello del proyecto](https://trello.com/b/tu-link-trello)  
+- [Tablero Trello del proyecto](https://trello.com/b/6oAN3uOT/proyecto-dps)  
+- [Repositorio Backend/API](https://github.com/joszuue/eventos_API)
 
 ---
 
@@ -90,3 +91,10 @@ npm install
 # Ejecuta la aplicación (usando Expo)
 npx expo start
 ```
+
+---
+
+### Repositorio Backend / API
+
+Puedes encontrar el código del backend y la API REST en el siguiente repositorio público:  
+[https://github.com/joszuue/eventos_API](https://github.com/joszuue/eventos_API)
